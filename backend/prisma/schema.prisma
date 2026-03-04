@@ -1,0 +1,40 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model File {
+  id           Int           @id @default(autoincrement())
+  slug         String        @unique
+  title        String
+  description  String?
+  tags         String?
+  originalName String
+  storagePath  String
+  mimeType     String
+  size         Int
+  active       Boolean       @default(true)
+  uploadedAt   DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  downloads    DownloadLog[]
+}
+
+model DownloadLog {
+  id        Int      @id @default(autoincrement())
+  fileId    Int
+  file      File     @relation(fields: [fileId], references: [id], onDelete: Cascade)
+  ipHash    String
+  userAgent String?
+  createdAt DateTime @default(now())
+}
