@@ -5,6 +5,9 @@ import './styles.css'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import PublicFile from './pages/PublicFile'
+// Avant ReactDOM.createRoot(...)
+const savedTheme = localStorage.getItem('theme') || 'light'
+document.documentElement.setAttribute('data-theme', savedTheme)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
