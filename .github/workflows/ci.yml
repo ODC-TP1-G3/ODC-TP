@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive  # pour inclure TP-DevOPs si c'est un submodule
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -36,8 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - name: Build Docker image
         run: |
           docker build -f backend/Dockerfile -t odc-tp-image:latest .
