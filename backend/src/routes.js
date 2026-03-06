@@ -140,7 +140,11 @@ router.get('/admin/files/:id/qrcode', requireAuth, async (req, res) => {
   try {
     const file = await prisma.file.findUnique({ where: { id } });
     if (!file) return res.status(404).json({ error: 'File not found' });
+ HEAD
     const publicUrl = `${process.env.PUBLIC_URL }/f/${file.slug}`;
+
+    const publicUrl = `${process.env.PUBLIC_URL || 'http://localhost:3000'}/f/${file.slug}`;
+ tp-devops
     const qr = await QRCode.toDataURL(publicUrl, { width: 300, margin: 2 });
     res.json({ qr, publicUrl });
   } catch (err) { res.status(500).json({ error: 'Server error' }); }

@@ -128,12 +128,21 @@ function QRModal({ fileId, onClose }) {
   return (
     <div style={{
       position: 'fixed', inset: 0,
+ HEAD
       background: '#0f172a',
       display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center',
       zIndex: 200, padding: '2rem',
       animation: 'fadeIn 0.2s ease',
     }}>
+
+      background: '#1e293b',
+      display: 'flex', flexDirection: 'column',
+      alignItems: 'center', justifyContent: 'center',
+      zIndex: 200, padding: '2rem',
+    }}>
+      {/* Bouton fermer */}
+ tp-devops
       <button onClick={onClose} style={{
         position: 'absolute', top: '1.5rem', right: '1.5rem',
         background: 'rgba(255,255,255,0.1)', border: 'none',
@@ -143,10 +152,17 @@ function QRModal({ fileId, onClose }) {
       }}>✕</button>
 
       <div style={{ textAlign: 'center', color: '#fff' }}>
+ HEAD
         <p style={{ fontSize: '0.78rem', color: '#64748b', marginBottom: '0.4rem', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
           Lien public
         </p>
         <h2 style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: '2rem', color: '#f1f5f9' }}>
+
+        <p style={{ fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.5rem', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+          Lien public
+        </p>
+        <h2 style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: '2rem' }}>
+ tp-devops
           Scanner pour télécharger
         </h2>
 
@@ -155,28 +171,52 @@ function QRModal({ fileId, onClose }) {
             <div style={{
               background: '#fff', borderRadius: 16,
               padding: '1.5rem', display: 'inline-block',
+ HEAD
               boxShadow: '0 0 80px rgba(99,102,241,0.5)',
+
+              boxShadow: '0 0 60px rgba(99,102,241,0.4)',
+ tp-devops
               marginBottom: '1.5rem',
             }}>
               <img src={data.qr} alt="QR" style={{ width: 240, height: 240, display: 'block' }} />
             </div>
+ HEAD
             <p style={{ fontSize: '0.75rem', color: '#475569', wordBreak: 'break-all', marginBottom: '1.5rem', maxWidth: 320 }}>
               {data.publicUrl}
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <a href={data.qr} download="qrcode.png" className="btn btn-primary">⬇ Télécharger le QR</a>
               <button className="btn btn-outline" style={{ color: '#94a3b8', borderColor: '#334155' }}
+
+
+            <p style={{ fontSize: '0.78rem', color: '#64748b', wordBreak: 'break-all', marginBottom: '1.5rem', maxWidth: 320 }}>
+              {data.publicUrl}
+            </p>
+
+            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a href={data.qr} download="qrcode.png" className="btn btn-primary">
+                ⬇ Télécharger le QR
+              </a>
+              <button className="btn btn-outline" style={{ color: '#fff', borderColor: '#475569' }}
+ tp-devops
                 onClick={() => navigator.clipboard.writeText(data.publicUrl)}>
                 📋 Copier le lien
               </button>
             </div>
           </>
+ HEAD
         ) : <p style={{ color: '#475569' }}>Génération...</p>}
+
+        ) : (
+          <p style={{ color: '#94a3b8' }}>Génération...</p>
+        )}
+ tp-devops
       </div>
     </div>
   )
 }
 
+ HEAD
 // ── Stats Panel ────────────────────────────────────────────────
 function StatsPanel() {
   const [stats, setStats] = useState(null)
@@ -238,6 +278,8 @@ function StatsPanel() {
   )
 }
 
+
+ tp-devops
 // ── Dashboard Main ─────────────────────────────────────────────
 export default function Dashboard() {
   const [tab, setTab] = useState('files')
@@ -246,6 +288,7 @@ export default function Dashboard() {
   const [showUpload, setShowUpload] = useState(false)
   const [editFile, setEditFile] = useState(null)
   const [qrFileId, setQrFileId] = useState(null)
+ HEAD
   const [dark, setDark] = useState(() => localStorage.getItem('theme') === 'dark')
   const navigate = useNavigate()
 
@@ -254,6 +297,10 @@ export default function Dashboard() {
     localStorage.setItem('theme', dark ? 'dark' : 'light')
   }, [dark])
 
+
+  const navigate = useNavigate()
+
+ tp-devops
   const loadFiles = useCallback(() => {
     api.listFiles().then(setFiles).catch(() => navigate('/login'))
   }, [navigate])
@@ -275,9 +322,12 @@ export default function Dashboard() {
         <span className="header-logo">🗂 FileShare</span>
         <div className="header-user">
           <span>Connecté : <strong>{username}</strong></span>
+ HEAD
           <button className="theme-toggle" onClick={() => setDark(d => !d)} title="Changer le thème">
             {dark ? '☀️' : '🌙'}
           </button>
+
+ tp-devops
           <button className="btn btn-outline btn-sm" onClick={() => api.logout().then(() => navigate('/login'))}>
             Déconnexion
           </button>
@@ -293,7 +343,11 @@ export default function Dashboard() {
         {tab === 'files' && (
           <>
             <div className="flex-between">
+ HEAD
               <h2 style={{ fontWeight: 700, fontSize: '1.1rem' }}>Fichiers ({files.length})</h2>
+
+              <h2 style={{ fontWeight: 700 }}>Fichiers ({files.length})</h2>
+ tp-devops
               <button className="btn btn-primary" onClick={() => setShowUpload(true)}>+ Ajouter</button>
             </div>
             <div className="table-wrap">
@@ -306,7 +360,11 @@ export default function Dashboard() {
                 </thead>
                 <tbody>
                   {files.length === 0
+ HEAD
                     ? <tr><td colSpan={7}><div className="empty"><div className="empty-icon">📂</div><p>Aucun fichier uploadé</p></div></td></tr>
+
+                    ? <tr><td colSpan={7} className="empty">Aucun fichier uploadé</td></tr>
+ tp-devops
                     : files.map(f => (
                       <tr key={f.id}>
                         <td><strong>{f.title}</strong></td>
@@ -317,6 +375,7 @@ export default function Dashboard() {
                         <td><span className="badge badge-blue">{f.downloadCount}</span></td>
                         <td>
                           <div className="actions">
+ HEAD
                             <button className="btn btn-outline btn-sm" onClick={() => setQrFileId(f.id)} title="QR Code">
                               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
@@ -327,6 +386,11 @@ export default function Dashboard() {
                             </button>
                             <button className="btn btn-outline btn-sm" onClick={() => setEditFile(f)} title="Modifier">✏️</button>
                             <button className="btn btn-danger btn-sm" onClick={() => handleDelete(f.id, f.title)} title="Supprimer">🗑</button>
+
+                            <button className="btn btn-outline btn-sm" onClick={() => setQrFileId(f.id)}>QR</button>
+                            <button className="btn btn-outline btn-sm" onClick={() => setEditFile(f)}>✏️</button>
+                            <button className="btn btn-danger btn-sm" onClick={() => handleDelete(f.id, f.title)}>🗑</button>
+ tp-devops
                           </div>
                         </td>
                       </tr>

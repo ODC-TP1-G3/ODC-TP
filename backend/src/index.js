@@ -8,7 +8,14 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(cors({
+HEAD
   origin: true,
+
+  origin: [
+    process.env.FRONTEND_URL || 'http://localhost:3000',
+    'http://192.168.0.32:3000',
+  ],
+ tp-devops
   credentials: true,
 }));
 
@@ -37,7 +44,11 @@ app.use('/api/f', downloadLimiter);
 app.use('/api', routes);
 app.get('/health', (_, res) => res.json({ status: 'ok' }));
 
+<<<<<<< HEAD
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Backend listening on port ${PORT}`);
   console.log(`Access from other devices via: http://<YOUR_LOCAL_IP>:${PORT}`);
 });
+=======
+app.listen(PORT, '0.0.0.0', () => console.log(`Backend listening on port ${PORT}`));
+>>>>>>> tp-devops

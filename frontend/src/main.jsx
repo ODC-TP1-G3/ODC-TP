@@ -5,9 +5,12 @@ import './styles.css'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import PublicFile from './pages/PublicFile'
+HEAD
 // Avant ReactDOM.createRoot(...)
 const savedTheme = localStorage.getItem('theme') || 'light'
 document.documentElement.setAttribute('data-theme', savedTheme)
+
+ tp-devops
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
