@@ -39,7 +39,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v3  # ⚠️ C'est ICI le problème potentiel
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1  # On n'a pas besoin de tout l'historique pour le build Docker
+          submodules: false
       - name: Build Docker image
         run: |
           docker build -f backend/Dockerfile -t odc-tp-image:latest .
